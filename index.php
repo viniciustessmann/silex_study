@@ -1,11 +1,28 @@
 <?php
 
-require_once 'vendor/autoload.php';
+use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-$app = new Silex\Application();
+require 'vendor/autoload.php';
 
-$app->get('/hello/{name}', function($name) use($app) {
-    return 'Hello '.$app->escape($name);
+$app = new Application();
+
+
+$app['debug'] = true;
+
+$app->get('/', function(){
+	return "HELLO WORLD";
+});
+
+$app->get('/blog', function (){
+    $output = '';
+    foreach ($blogPosts as $post) {
+        $output .= $post['title'];
+        $output .= '<br />';
+    }
+
+    return $output;
 });
 
 $app->run();
