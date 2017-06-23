@@ -21,8 +21,12 @@ $app->get('/blog', function (){
         $output .= $post['title'];
         $output .= '<br />';
     }
-
     return $output;
+});
+
+
+$app->get('/user/{id}', function(Silex\Application $app, $id){
+	return 'USER: ' . $id;
 });
 
 $app->run();
